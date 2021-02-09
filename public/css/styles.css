@@ -1,0 +1,23 @@
+
+body {
+  background-color: #E8ECEF;
+}
+
+.centered {
+    padding-top: 200px;
+    text-align: center;
+}
+
+.secret-text {
+  text-align: center;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #000;
+}
+
+.card{
+  padding: 1rem;
+  width: 20rem;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 4px #ccc;
+}
