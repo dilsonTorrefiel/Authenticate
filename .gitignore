@@ -39,8 +39,8 @@ build/Release
 
 # Dependency directories
 # HEroku app will crash if node modules are gitignore
-#node_modules/
-#jspm_packages/
+node_modules/
+jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
