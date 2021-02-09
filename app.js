@@ -71,7 +71,7 @@ fetch(api+'/users')
         email:data[e].email,
         phone: data[e].phone
       });
-      newID.save();
+      // newID.save();
     })
 });
 
