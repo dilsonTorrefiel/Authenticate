@@ -1,10 +1,16 @@
 // jshint esversion:6
 
+// environment variables that holds the secrets
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
+// Fetch function to work
 const fetch = require('node-fetch');
+// mongoose-encryption
+const encrypt = require('mongoose-encryption');
 
 const app = express();
 
@@ -12,6 +18,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
 app.set('view-engine', 'ejs');
 
+console.log(process.env.API_KEY);
 // mongoose.connect('mongodb://localhost:27017/userDB', {useNewUrlParser:true, useUnifiedTopology:true});
 // connect to mongo database
 mongoose.connect("mongodb+srv://admin-dilson:choy@2131986@cluster0.9n8g2.mongodb.net/todolistDB?retryWrites=true&w=majority", {
@@ -19,10 +26,19 @@ mongoose.connect("mongodb+srv://admin-dilson:choy@2131986@cluster0.9n8g2.mongodb
   useNewUrlParser: true
 });
 
-const userSchema = {
-  email: String,
-  password: String
-};
+// const userSchema = {
+//   email: String,
+//   password: String
+// };
+
+const userSchema =new mongoose.Schema({
+    email: String,
+    password: String
+});
+
+
+userSchema.plugin(encrypt, {secret: process.env.SECRET, encryptedFields:['password'] });
+
 const User = new mongoose.model('User', userSchema);
 
 /* ------------------------------------------fetch data from external server-----------------------------------------*/
@@ -62,7 +78,7 @@ fetch(api+'/users')
     return res.json();
   })
   .then((data)=>{
-    console.log(data);
+    // console.log(data);
     // res.send(data);
     Object.keys(data).map(function(e){
       // res.send(data);
@@ -129,7 +145,7 @@ app.get('/fetchAPIupdate', function(req, res){
 
 app.post('/update', function(req, res){
     const id = req.body.update;
-    console.log(id);
+    // console.log(id);
     res.render('fetchAPIupdate.ejs', {updateID: id});
 
 });
