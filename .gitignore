@@ -38,6 +38,7 @@ bower_components
 build/Release
 
 # Dependency directories
+# HEroku app will crash if node modules are gitignore
 #node_modules/
 #jspm_packages/
 
